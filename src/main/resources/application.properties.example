@@ -1,0 +1,16 @@
+# Application Configuration Example
+# Copy this file to application.properties and fill in your actual values
+
+# OpenAI Configuration
+openai.api.key=your_openai_api_key_here
+
+# Qdrant Configuration  
+qdrant.api.key=your_qdrant_api_key_here
+qdrant.cluster.url=your_qdrant_cluster_url_here
+
+# Email Configuration (if using)
+email.username=your_email@example.com
+email.password=your_email_password_here
+
+# Other application settings
+# Add any other configuration properties here
