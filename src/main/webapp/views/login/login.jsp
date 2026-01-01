@@ -26,7 +26,11 @@
               <div
                 class="flex items-center border border-gray-300 rounded-lg px-3 py-2 bg-white focus-within:ring-2 focus-within:ring-blue-400 gap-2"
               >
-                <jsp:include page="../../assets/User.svg" />
+                <img
+                  src="<%=request.getContextPath()%>/assets/User.svg"
+                  alt="User"
+                  class="w-5 h-5"
+                />
                 <input type="email" placeholder="Your email" name="email"
                 id="email" class="w-full outline-none bg-transparent" required
                 <% Cookie[] cookies = request.getCookies(); if (cookies != null)
@@ -39,7 +43,11 @@
               <div
                 class="flex items-center border border-gray-300 rounded-lg px-3 py-2 bg-white focus-within:ring-2 focus-within:ring-blue-400 gap-2"
               >
-                <jsp:include page="../../assets/Key.svg" />
+                <img
+                  src="<%=request.getContextPath()%>/assets/Key.svg"
+                  alt="Password"
+                  class="w-5 h-5"
+                />
                 <input type="password" placeholder="Password" class="w-full
                 outline-none bg-transparent" name="password" id="password"
                 required <% if (cookies != null) { for (Cookie cookie : cookies)
