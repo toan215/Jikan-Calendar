@@ -4,6 +4,12 @@
         <session-timeout>30</session-timeout>
     </session-config>
 
+    <!-- MIME mapping for SVG files -->
+    <mime-mapping>
+        <extension>svg</extension>
+        <mime-type>image/svg+xml</mime-type>
+    </mime-mapping>
+
     <!-- Error handling -->
     <error-page>
         <error-code>500</error-code>
