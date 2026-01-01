@@ -20,7 +20,8 @@ FROM tomcat:10.1-jre17-temurin-jammy
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Copy WAR file from build stage
-COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/calendar.war
+# Deploy as ROOT.war to make it accessible at root path /
+COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
 
 # Set environment variables
 ENV CATALINA_OPTS="-Xmx512m -Xms256m -XX:+UseG1GC"
@@ -31,7 +32,7 @@ EXPOSE 8080
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=60s --retries=3 \
-  CMD curl -f http://localhost:8080/calendar/ || exit 1
+    CMD curl -f http://localhost:8080/calendar/ || exit 1
 
 # Start Tomcat
 CMD ["catalina.sh", "run"]

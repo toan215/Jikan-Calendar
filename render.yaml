@@ -34,7 +34,7 @@ services:
         value: 8080
       - key: JAVA_TOOL_OPTIONS
         value: -Xmx512m -Xms256m
-    healthCheckPath: /calendar
+    healthCheckPath: /jikan
     autoDeploy: true
 
   # Optional: Nếu bạn muốn tạo PostgreSQL database trên Render
