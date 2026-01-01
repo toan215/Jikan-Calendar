@@ -5,10 +5,10 @@
 package com.service.Event;
 
 import com.dao.Event.EventDAO;
+import com.database.EMFProvider;
 import com.model.UserEvents;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -126,8 +126,8 @@ public class EventService implements IEventService {
      * Kiểm tra có event nào trong calendar bị trùng thời gian không
      *
      * @param calendarId id của calendar
-     * @param newStart thời gian bắt đầu event mới
-     * @param newEnd thời gian kết thúc event mới
+     * @param newStart   thời gian bắt đầu event mới
+     * @param newEnd     thời gian kết thúc event mới
      * @return true nếu có event trùng, false nếu không
      */
     public boolean isEventConflict(int calendarId, Date newStart, Date newEnd) {
@@ -142,7 +142,7 @@ public class EventService implements IEventService {
     }
 
     public UserEvents getFirstEventByTitle(String title) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CLDPU");
+        EntityManagerFactory emf = EMFProvider.getEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<UserEvents> query = em.createQuery(

@@ -1,2 +1,13 @@
 /target/
 src/main/resources/application.properties
+
+# Environment Variables (contains sensitive data)
+.env
+
+# IDE
+.idea/
+.vscode/
+*.iml
+.classpath
+.project
+.settings/

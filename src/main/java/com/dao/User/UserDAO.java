@@ -115,7 +115,8 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
                     .setParameter("email", email)
                     .executeUpdate();
             tx.commit();
-            System.out.println("[updatePassword] ✔ Cập nhật thành công cho email: " + email + " (số dòng ảnh hưởng: " + updated + ")");
+            System.out.println("[updatePassword] ✔ Cập nhật thành công cho email: " + email + " (số dòng ảnh hưởng: "
+                    + updated + ")");
         } catch (Exception e) {
             if (tx.isActive()) {
                 tx.rollback();
@@ -147,7 +148,7 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
     public int countUsersByMonth(int year, int month) {
         EntityManager em = getEntityManager();
         try {
-            String jpql = "SELECT COUNT(u) FROM User u WHERE YEAR(u.createdAt) = :year AND MONTH(u.createdAt) = :month";
+            String jpql = "SELECT COUNT(u) FROM User u WHERE EXTRACT(YEAR FROM u.createdAt) = :year AND EXTRACT(MONTH FROM u.createdAt) = :month";
             jakarta.persistence.Query query = em.createQuery(jpql);
             query.setParameter("year", year);
             query.setParameter("month", month);
@@ -165,15 +166,16 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
         EntityManager em = getEntityManager();
         try {
             StringBuilder jpql = new StringBuilder("SELECT u FROM User u WHERE 1=1");
-            
+
             if (name != null && !name.trim().isEmpty()) {
-                jpql.append(" AND (u.firstName LIKE :name OR u.lastName LIKE :name OR u.username LIKE :name OR CONCAT(u.firstName, ' ', u.lastName) LIKE :name OR CONCAT(u.lastName, ' ', u.firstName) LIKE :name)");
+                jpql.append(
+                        " AND (u.firstName LIKE :name OR u.lastName LIKE :name OR u.username LIKE :name OR (u.firstName || ' ' || u.lastName) LIKE :name OR (u.lastName || ' ' || u.firstName) LIKE :name)");
             }
-            
+
             if (email != null && !email.trim().isEmpty()) {
                 jpql.append(" AND u.email LIKE :email");
             }
-            
+
             if (status != null && !status.trim().isEmpty()) {
                 if ("active".equals(status)) {
                     jpql.append(" AND u.active = true");
@@ -181,21 +183,21 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
                     jpql.append(" AND u.active = false");
                 }
             }
-            
+
             jpql.append(" ORDER BY u.createdAt DESC");
-            
+
             jakarta.persistence.Query query = em.createQuery(jpql.toString(), User.class);
-            
+
             if (name != null && !name.trim().isEmpty()) {
                 query.setParameter("name", "%" + name.trim() + "%");
             }
-            
+
             if (email != null && !email.trim().isEmpty()) {
                 query.setParameter("email", "%" + email.trim() + "%");
             }
-            
+
             return query.getResultList();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -205,19 +207,21 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
     }
 
     @Override
-    public List<User> searchUsersWithPagination(String name, String email, String status, int pageNumber, int pageSize) {
+    public List<User> searchUsersWithPagination(String name, String email, String status, int pageNumber,
+            int pageSize) {
         EntityManager em = getEntityManager();
         try {
             StringBuilder jpql = new StringBuilder("SELECT u FROM User u WHERE 1=1");
-            
+
             if (name != null && !name.trim().isEmpty()) {
-                jpql.append(" AND (u.firstName LIKE :name OR u.lastName LIKE :name OR u.username LIKE :name OR CONCAT(u.firstName, ' ', u.lastName) LIKE :name OR CONCAT(u.lastName, ' ', u.firstName) LIKE :name)");
+                jpql.append(
+                        " AND (u.firstName LIKE :name OR u.lastName LIKE :name OR u.username LIKE :name OR (u.firstName || ' ' || u.lastName) LIKE :name OR (u.lastName || ' ' || u.firstName) LIKE :name)");
             }
-            
+
             if (email != null && !email.trim().isEmpty()) {
                 jpql.append(" AND u.email LIKE :email");
             }
-            
+
             if (status != null && !status.trim().isEmpty()) {
                 if ("active".equals(status)) {
                     jpql.append(" AND u.active = true");
@@ -225,25 +229,25 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
                     jpql.append(" AND u.active = false");
                 }
             }
-            
+
             jpql.append(" ORDER BY u.createdAt DESC");
-            
+
             jakarta.persistence.Query query = em.createQuery(jpql.toString(), User.class);
-            
+
             if (name != null && !name.trim().isEmpty()) {
                 query.setParameter("name", "%" + name.trim() + "%");
             }
-            
+
             if (email != null && !email.trim().isEmpty()) {
                 query.setParameter("email", "%" + email.trim() + "%");
             }
-            
+
             // Set pagination
             query.setFirstResult((pageNumber - 1) * pageSize);
             query.setMaxResults(pageSize);
-            
+
             return query.getResultList();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -257,15 +261,16 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
         EntityManager em = getEntityManager();
         try {
             StringBuilder jpql = new StringBuilder("SELECT COUNT(u) FROM User u WHERE 1=1");
-            
+
             if (name != null && !name.trim().isEmpty()) {
-                jpql.append(" AND (u.firstName LIKE :name OR u.lastName LIKE :name OR u.username LIKE :name OR CONCAT(u.firstName, ' ', u.lastName) LIKE :name OR CONCAT(u.lastName, ' ', u.firstName) LIKE :name)");
+                jpql.append(
+                        " AND (u.firstName LIKE :name OR u.lastName LIKE :name OR u.username LIKE :name OR (u.firstName || ' ' || u.lastName) LIKE :name OR (u.lastName || ' ' || u.firstName) LIKE :name)");
             }
-            
+
             if (email != null && !email.trim().isEmpty()) {
                 jpql.append(" AND u.email LIKE :email");
             }
-            
+
             if (status != null && !status.trim().isEmpty()) {
                 if ("active".equals(status)) {
                     jpql.append(" AND u.active = true");
@@ -273,19 +278,19 @@ public class UserDAO extends BaseDAO<User> implements IUserDAO {
                     jpql.append(" AND u.active = false");
                 }
             }
-            
+
             jakarta.persistence.Query query = em.createQuery(jpql.toString());
-            
+
             if (name != null && !name.trim().isEmpty()) {
                 query.setParameter("name", "%" + name.trim() + "%");
             }
-            
+
             if (email != null && !email.trim().isEmpty()) {
                 query.setParameter("email", "%" + email.trim() + "%");
             }
-            
+
             return ((Long) query.getSingleResult()).intValue();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             return 0;

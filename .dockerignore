@@ -1,0 +1,40 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.idea
+.vscode
+*.iml
+nb-configuration.xml
+nbactions.xml
+
+# Build artifacts
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Environment files  
+.env
+.env.example
+.env.local
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
+*.md
+
+# Scripts
+reload-env.ps1
+
+# Agent
+.agent/

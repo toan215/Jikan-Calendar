@@ -4,6 +4,7 @@
  */
 package com.dao;
 
+import com.database.EMFProvider;
 import com.model.UserEvents;
 import jakarta.persistence.*;
 import java.sql.Timestamp;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public abstract class BaseDAO<T> {
 
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("CLDPU");
+    private static final EntityManagerFactory emf = EMFProvider.getEntityManagerFactory();
 
     private final Class<T> entityClass;
 
@@ -193,8 +194,8 @@ public abstract class BaseDAO<T> {
         try {
             return em.createQuery(
                     "SELECT e FROM UserEvents e "
-                    + "WHERE e.idCalendar.idUser.idUser = :userId "
-                    + "AND e.startDate >= :start AND e.dueDate <= :end",
+                            + "WHERE e.idCalendar.idUser.idUser = :userId "
+                            + "AND e.startDate >= :start AND e.dueDate <= :end",
                     UserEvents.class)
                     .setParameter("userId", userId)
                     .setParameter("start", start)

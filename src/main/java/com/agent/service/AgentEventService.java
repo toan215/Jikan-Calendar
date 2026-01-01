@@ -7,6 +7,7 @@ package com.agent.service;
 import com.agent.model.Action;
 import static com.agent.service.ScheduleAIAgent.tryParseActions;
 import com.dao.Calendar.CalendarDAO;
+import com.database.EMFProvider;
 //import com.dao.Reminder.EmailReminderDAO;
 import com.model.Calendar;
 import com.model.User;
@@ -16,7 +17,6 @@ import com.service.Event.EventService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -33,8 +33,9 @@ import java.util.regex.Pattern;
  */
 public class AgentEventService {
 
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("CLDPU");
+    private final EntityManagerFactory emf = EMFProvider.getEntityManagerFactory();
     private final CalendarService calendarService = new CalendarService();
+
     public void saveEventFromAction(Action action, Calendar calendar) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -108,8 +109,7 @@ public class AgentEventService {
             em.close();
         }
     }
-    
-    
+
     public void saveUserEvent(UserEvents event) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -129,8 +129,7 @@ public class AgentEventService {
                 "yyyy-MM-dd'T'HH:mm",
                 "yyyy-MM-dd HH:mm",
                 "dd/MM/yyyy HH:mm",
-                "dd-MM-yyyy HH:mm"
-        );
+                "dd-MM-yyyy HH:mm");
 
         for (String pattern : patterns) {
             try {
@@ -169,14 +168,15 @@ public class AgentEventService {
 
         String jsonPart = null;
         if (matcher.find()) {
-            jsonPart = matcher.group();  // 🎯 phần chỉ chứa JSON nội bộ
+            jsonPart = matcher.group(); // 🎯 phần chỉ chứa JSON nội bộ
         }
 
-        List<Action> actions = tryParseActions(jsonPart);  // ✅ truyền JSON thuần vào
+        List<Action> actions = tryParseActions(jsonPart); // ✅ truyền JSON thuần vào
 
         System.out.println("🎯 Actions parsed: " + actions);
 
-        // ✂️ 2. Gỡ phần JSON khỏi aiResponse để chỉ hiển thị phần văn bản cho người dùng
+        // ✂️ 2. Gỡ phần JSON khỏi aiResponse để chỉ hiển thị phần văn bản cho người
+        // dùng
         String userVisibleText = jsonPart != null
                 ? aiResponse.replace(jsonPart, "").trim()
                 : aiResponse.trim();
@@ -256,10 +256,12 @@ public class AgentEventService {
                                 existing.setName((String) action.getArgs().get("title"));
                             }
                             if (action.getArgs().containsKey("start_time")) {
-                                existing.setStartDate(Timestamp.valueOf(tryParseDateTime((String) action.getArgs().get("start_time"))));
+                                existing.setStartDate(Timestamp
+                                        .valueOf(tryParseDateTime((String) action.getArgs().get("start_time"))));
                             }
                             if (action.getArgs().containsKey("end_time")) {
-                                existing.setDueDate(Timestamp.valueOf(tryParseDateTime((String) action.getArgs().get("end_time"))));
+                                existing.setDueDate(
+                                        Timestamp.valueOf(tryParseDateTime((String) action.getArgs().get("end_time"))));
                             }
                             if (action.getArgs().containsKey("location")) {
                                 existing.setLocation((String) action.getArgs().get("location"));

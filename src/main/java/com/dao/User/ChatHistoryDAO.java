@@ -4,10 +4,10 @@
  */
 package com.dao.User;
 
+import com.database.EMFProvider;
 import com.model.ChatHistory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ChatHistoryDAO {
 
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("CLDPU");
+    private EntityManagerFactory emf = EMFProvider.getEntityManagerFactory();
 
     public void save(ChatHistory chat) {
         EntityManager em = emf.createEntityManager();
@@ -49,21 +49,22 @@ public class ChatHistoryDAO {
         }
         return result;
     }
+
     public boolean deleteBySessionId(String sessionId) {
-   EntityManager em = emf.createEntityManager();
-    try {
-        em.getTransaction().begin();
-        em.createQuery("DELETE FROM ChatHistory c WHERE c.sessionId = :sessionId")
-          .setParameter("sessionId", sessionId)
-          .executeUpdate();
-        em.getTransaction().commit();
-        return true;
-    } catch (Exception e) {
-        e.printStackTrace();
-        em.getTransaction().rollback();
-        return false;
-    } finally {
-        em.close();
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.createQuery("DELETE FROM ChatHistory c WHERE c.sessionId = :sessionId")
+                    .setParameter("sessionId", sessionId)
+                    .executeUpdate();
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+            return false;
+        } finally {
+            em.close();
+        }
     }
-}
 }

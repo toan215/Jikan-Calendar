@@ -1,0 +1,47 @@
+services:
+  - type: web
+    name: jikan-calendar
+    runtime: docker
+    plan: free
+    buildCommand: mvn clean package -DskipTests
+    startCommand: chmod +x start.sh && ./start.sh
+    envVars:
+      - key: DB_TYPE
+        value: postgres
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: 5432
+      - key: DB_NAME
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_SCHEMA
+        value: public
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: QDRANT_API_KEY
+        sync: false
+      - key: QDRANT_CLUSTER_URL
+        sync: false
+      - key: EMAIL_USERNAME
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: PORT
+        value: 8080
+      - key: JAVA_TOOL_OPTIONS
+        value: -Xmx512m -Xms256m
+    healthCheckPath: /calendar
+    autoDeploy: true
+
+  # Optional: Nếu bạn muốn tạo PostgreSQL database trên Render
+  # - type: pserv
+  #   name: jikan-calendar-db
+  #   plan: free
+  #   env: docker
+  #   databases:
+  #     - name: jikan_db
+  #       user: jikan_user

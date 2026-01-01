@@ -12,9 +12,10 @@ public class AppListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        reminderScheduler = new ReminderScheduler();
-        reminderScheduler.start();
-        System.out.println(">>> ReminderScheduler started by AppListener");
+        // TEMPORARILY DISABLED - Testing PostgreSQL connection
+        // reminderScheduler = new ReminderScheduler();
+        // reminderScheduler.start();
+        System.out.println(">>> AppListener initialized (ReminderScheduler disabled for connection testing)");
     }
 
     @Override

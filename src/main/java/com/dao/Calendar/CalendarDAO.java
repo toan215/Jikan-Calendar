@@ -63,7 +63,7 @@ public class CalendarDAO extends BaseDAO<Calendar> implements ICalendarDAO {
     public int countCalendarsByMonth(int year, int month) {
         EntityManager em = getEntityManager();
         try {
-            String jpql = "SELECT COUNT(c) FROM Calendar c WHERE YEAR(c.createdAt) = :year AND MONTH(c.createdAt) = :month";
+            String jpql = "SELECT COUNT(c) FROM Calendar c WHERE EXTRACT(YEAR FROM c.createdAt) = :year AND EXTRACT(MONTH FROM c.createdAt) = :month";
             jakarta.persistence.Query query = em.createQuery(jpql);
             query.setParameter("year", year);
             query.setParameter("month", month);
@@ -117,6 +117,5 @@ public class CalendarDAO extends BaseDAO<Calendar> implements ICalendarDAO {
             em.close();
         }
     }
-
 
 }

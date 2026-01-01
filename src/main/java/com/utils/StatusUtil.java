@@ -1,9 +1,10 @@
-package com.util;
+package com.utils;
 
 public class StatusUtil {
-    
+
     /**
      * Lấy CSS class cho trạng thái đơn hàng
+     * 
      * @param status Trạng thái đơn hàng
      * @return CSS class tương ứng
      */
@@ -11,7 +12,7 @@ public class StatusUtil {
         if (status == null || status.trim().isEmpty()) {
             return "status-pending";
         }
-        
+
         switch (status.trim()) {
             case "Processing":
                 return "status-processing";
@@ -23,9 +24,10 @@ public class StatusUtil {
                 return "status-pending";
         }
     }
-    
+
     /**
      * Lấy tên hiển thị cho trạng thái
+     * 
      * @param status Trạng thái đơn hàng
      * @return Tên hiển thị
      */
@@ -33,7 +35,7 @@ public class StatusUtil {
         if (status == null || status.trim().isEmpty()) {
             return "Chưa xác định";
         }
-        
+
         switch (status.trim()) {
             case "Processing":
                 return "Đang xử lý";
@@ -45,4 +47,4 @@ public class StatusUtil {
                 return "Chưa xác định";
         }
     }
-} 
+}

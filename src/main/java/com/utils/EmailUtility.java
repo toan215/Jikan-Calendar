@@ -4,6 +4,7 @@
  */
 package com.utils;
 
+import com.database.DBinformation;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.io.UnsupportedEncodingException;
@@ -15,16 +16,18 @@ import java.util.Properties;
  */
 public class EmailUtility {
 
-    public static void send(String toEmail, String subject, String messageText) throws MessagingException, UnsupportedEncodingException {
+    public static void send(String toEmail, String subject, String messageText)
+            throws MessagingException, UnsupportedEncodingException {
 
-        // Email của bạn
-        final String fromEmail = "noreply.jikan@gmail.com";
-        // App password nếu dùng Gmail
-        final String password = "zbeq rsey liow kfhh";
+        // Load credentials from .env via DBinformation
+        final String fromEmail = DBinformation.dotenv.get("EMAIL_FROM", "noreply.jikan@gmail.com");
+        final String password = DBinformation.dotenv.get("EMAIL_PASSWORD", "");
+        final String smtpHost = DBinformation.dotenv.get("EMAIL_SMTP_HOST", "smtp.gmail.com");
+        final String smtpPort = DBinformation.dotenv.get("EMAIL_SMTP_PORT", "587");
 
         Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.host", smtpHost);
+        props.put("mail.smtp.port", smtpPort);
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
 

@@ -100,6 +100,7 @@ public class EventDAO extends BaseDAO<UserEvents> implements IEventDAO {
             em.close();
         }
     }
+
     @Override
     public List<UserEvents> getEventsToRemind() {
         EntityManager em = null;
@@ -108,8 +109,7 @@ public class EventDAO extends BaseDAO<UserEvents> implements IEventDAO {
             Date now = new Date();
 
             // Lấy tất cả event cần nhắc (remindMethod = true) có startDate >= hiện tại
-            String jpql
-                    = "SELECT e FROM UserEvents e "
+            String jpql = "SELECT e FROM UserEvents e "
                     + "WHERE e.remindMethod = true "
                     + "AND e.startDate >= :now";
             TypedQuery<UserEvents> query = em.createQuery(jpql, UserEvents.class);
@@ -165,11 +165,12 @@ public class EventDAO extends BaseDAO<UserEvents> implements IEventDAO {
             }
         }
     }
+
     @Override
     public int countEventsByMonth(int year, int month) {
         EntityManager em = getEntityManager();
         try {
-            String jpql = "SELECT COUNT(e) FROM UserEvents e WHERE YEAR(e.createdAt) = :year AND MONTH(e.createdAt) = :month";
+            String jpql = "SELECT COUNT(e) FROM UserEvents e WHERE EXTRACT(YEAR FROM e.createdAt) = :year AND EXTRACT(MONTH FROM e.createdAt) = :month";
             jakarta.persistence.Query query = em.createQuery(jpql);
             query.setParameter("year", year);
             query.setParameter("month", month);
@@ -182,11 +183,12 @@ public class EventDAO extends BaseDAO<UserEvents> implements IEventDAO {
         }
     }
 
-     @Override
+    @Override
     public boolean deleteByTitle(String title) {
         return deleteByTitles(title);
     }
-@Override
+
+    @Override
     public List<UserEvents> findEventsBetween(Timestamp start, Timestamp end) {
         return findEventsBetweens(start, end);
     }
@@ -195,6 +197,5 @@ public class EventDAO extends BaseDAO<UserEvents> implements IEventDAO {
     public List<UserEvents> findEventsBetweenUserID(Timestamp start, Timestamp end, int userId) {
         return findEventsBetweenUserId(start, end, userId);
     }
-    
 
 }

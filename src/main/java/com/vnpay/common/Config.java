@@ -4,6 +4,7 @@
  */
 package com.vnpay.common;
 
+import com.database.DBinformation;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -24,11 +25,15 @@ import jakarta.servlet.http.HttpServletRequest;
  */
 public class Config {
 
-    public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static String vnp_ReturnUrl = "http://localhost:9999/PRJ_Assignment_toidaiii/vnpayReturn";
-    public static String vnp_TmnCode = "4YUP19I4";
-    public static String secretKey = "MDUIFDCRAKLNBPOFIAFNEKFRNMFBYEPX";
-    public static String vnp_ApiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
+    // Load VNPay credentials from .env
+    public static String vnp_PayUrl = DBinformation.dotenv.get("VNPAY_PAY_URL",
+            "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html");
+    public static String vnp_ReturnUrl = DBinformation.dotenv.get("VNPAY_RETURN_URL",
+            "http://localhost:8080/PRJ_Assignment_toidaiii/vnpayReturn");
+    public static String vnp_TmnCode = DBinformation.dotenv.get("VNPAY_TMN_CODE", "4YUP19I4");
+    public static String secretKey = DBinformation.dotenv.get("VNPAY_SECRET_KEY", "MDUIFDCRAKLNBPOFIAFNEKFRNMFBYEPX");
+    public static String vnp_ApiUrl = DBinformation.dotenv.get("VNPAY_API_URL",
+            "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction");
 
     public static String md5(String message) {
         String digest = null;
@@ -66,7 +71,7 @@ public class Config {
         return digest;
     }
 
-    //Util for VNPAY
+    // Util for VNPAY
     public static String hashAllFields(Map fields) {
         List fieldNames = new ArrayList(fields.keySet());
         Collections.sort(fieldNames);
@@ -84,9 +89,9 @@ public class Config {
                 sb.append("&");
             }
         }
-        return hmacSHA512(secretKey,sb.toString());
+        return hmacSHA512(secretKey, sb.toString());
     }
-    
+
     public static String hmacSHA512(final String key, final String data) {
         try {
 
@@ -109,7 +114,7 @@ public class Config {
             return "";
         }
     }
-    
+
     public static String getIpAddress(HttpServletRequest request) {
         String ipAdress;
         try {
