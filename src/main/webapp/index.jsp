@@ -1,4 +1,4 @@
-<%-- 
+﻿<%-- 
     Document   : index
     Created on : Jun 21, 2025, 2:32:53 PM
     Author     : DELL
@@ -19,7 +19,7 @@
                 <h1 class="text-4xl md:text-5xl font-bold mb-2 tracking-wide">JiKan</h1>
                 <h2 class="text-xl md:text-2xl font-semibold mb-4">manage your time well</h2>
                 <p class="italic text-base md:text-lg max-w-2xl mb-8">
-                    Time is a priceless resource—free to everyone, yet impossible to own. You can spend it, use it, or waste it, but you can never store or retrieve it once it's gone. Every second matters, because lost time is lost forever.
+                    Time is a priceless resourceΓÇöfree to everyone, yet impossible to own. You can spend it, use it, or waste it, but you can never store or retrieve it once it's gone. Every second matters, because lost time is lost forever.
                 </p>
                 <img src="assets/software-img.png" alt="JiKan App Screenshot" class="mx-auto w-full max-w-2xl" />
             </div>
@@ -35,7 +35,7 @@
                         </div>
                         <h3 class="font-bold text-lg mb-2">Course Scheduling</h3>
                         <p class="text-gray-500 text-sm">
-                            Automatically sync your course enrollment with your calendar. Never miss a class – view, plan, and manage your entire learning journey in one place.
+                            Automatically sync your course enrollment with your calendar. Never miss a class ΓÇô view, plan, and manage your entire learning journey in one place.
                         </p>
                     </div>
                     <!-- Collaboration -->
@@ -46,7 +46,7 @@
                         </div>
                         <h3 class="font-bold text-lg mb-2">Collaboration</h3>
                         <p class="text-gray-500 text-sm">
-                            With shared calendars, everyone stays aligned — view common schedules, co-manage events, assign roles (view/edit), and avoid conflicts. Perfect for classrooms, project teams, or multi-user learning environments.
+                            With shared calendars, everyone stays aligned ΓÇö view common schedules, co-manage events, assign roles (view/edit), and avoid conflicts. Perfect for classrooms, project teams, or multi-user learning environments.
                         </p>
                     </div>
                     <!-- Task Management -->
@@ -57,7 +57,7 @@
                         </div>
                         <h3 class="font-bold text-lg mb-2">Task Management</h3>
                         <p class="text-gray-500 text-sm">
-                            Create to-dos, assign deadlines, set priorities, and track progress — all directly within your calendar. Stay organized and focused with tasks that sync with your schedule.
+                            Create to-dos, assign deadlines, set priorities, and track progress ΓÇö all directly within your calendar. Stay organized and focused with tasks that sync with your schedule.
                         </p>
                     </div>
                 </div>
@@ -159,7 +159,7 @@
                 <div class="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4 tracking-wide">USING OUR JiKan</h2>
                     <p class="text-gray-500 text-base md:text-lg mb-8 max-w-md">
-                        Take control of your time with our intelligent calendar system — built for learners, teams, and professionals. From smart scheduling to shared calendars and task tracking, everything you need is just one click away.
+                        Take control of your time with our intelligent calendar system ΓÇö built for learners, teams, and professionals. From smart scheduling to shared calendars and task tracking, everything you need is just one click away.
                     </p>
                     <a href="login" class="bg-sky-400 hover:bg-sky-500 text-white font-bold px-10 py-3 rounded-xl transition w-48 text-center">
                         SIGN IN
@@ -178,7 +178,7 @@
                 <div class="flex-1 text-white">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center md:text-left">CONTACT US</h2>
                     <p class="mb-6 text-gray-200 text-base md:text-lg text-center md:text-left">
-                        We’d love to hear from you!<br>
+                        WeΓÇÖd love to hear from you!<br>
                         Whether you have a question about features, pricing, or need support, our team is here to help.
                     </p>
                     <ul class="space-y-5 text-base">

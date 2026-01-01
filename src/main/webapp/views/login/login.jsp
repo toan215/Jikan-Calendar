@@ -1,20 +1,16 @@
-<%-- Document : login Created on : Jul 10, 2025, 1:25:59 PM Author : DELL --%>
+﻿<%-- Document : login Created on : Jul 10, 2025, 1:25:59 PM Author : DELL --%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Log In</title>
-    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <% if (session != null && session.getAttribute("user_email") != null) { // Nếu
-  đã đăng nhập thì chuyển hướng đến trang home.jsp
-  response.sendRedirect(request.getContextPath() + "/home"); return; // Dừng
-  lại, không cần tiếp tục xử lý trong trang login.jsp } %>
+  <% if (session != null && session.getAttribute("user_email") != null) {
+  response.sendRedirect(request.getContextPath() + "/home"); return; } %>
   <body class="min-h-screen flex items-center justify-center bg-white">
     <div class="w-full h-screen flex">
-      <!-- Left: Login Form -->
       <div
         class="w-full md:w-1/2 flex flex-col justify-center items-center px-8 bg-white"
       >
@@ -30,7 +26,6 @@
               <div
                 class="flex items-center border border-gray-300 rounded-lg px-3 py-2 bg-white focus-within:ring-2 focus-within:ring-blue-400 gap-2"
               >
-                <!-- User Icon -->
                 <jsp:include page="../../assets/User.svg" />
                 <input type="email" placeholder="Your email" name="email"
                 id="email" class="w-full outline-none bg-transparent" required
@@ -44,20 +39,17 @@
               <div
                 class="flex items-center border border-gray-300 rounded-lg px-3 py-2 bg-white focus-within:ring-2 focus-within:ring-blue-400 gap-2"
               >
-                <!-- Key Icon -->
                 <jsp:include page="../../assets/Key.svg" />
                 <input type="password" placeholder="Password" class="w-full
                 outline-none bg-transparent" name="password" id="password"
-                required <% // Xóa value="" cố định và thay bằng logic đọc
-                cookie if (cookies != null) { for (Cookie cookie : cookies) { if
-                ("user_password".equals(cookie.getName())) { out.print("value='"
-                + cookie.getValue() + "'"); break; // Thoát khỏi vòng lặp khi
-                tìm thấy } } } %> />
+                required <% if (cookies != null) { for (Cookie cookie : cookies)
+                { if ("user_password".equals(cookie.getName())) {
+                out.print("value='" + cookie.getValue() + "'"); break; } } } %>
+                />
               </div>
             </div>
             <div class="flex items-center justify-between mb-4 px-2">
               <div class="flex items-center">
-                <!--  Remember me -->
                 <input
                   id="remember_me"
                   name="remember_me"
@@ -70,18 +62,15 @@
                   >Remember me</label
                 >
               </div>
-              <!--Forgot Password-->
               <a
                 href="requestPassword"
                 class="text-blue-400 text-sm hover:underline"
                 >Forgot password?</a
               >
             </div>
-            <%-- Hiển thị thông báo lỗi đẹp --%>
             <c:if test="${not empty mess}">
               <span class="block text-xs text-red-500 mt-1">${mess}</span>
             </c:if>
-            <!--Login-->
             <button
               type="submit"
               class="w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition mb-4"
@@ -94,28 +83,21 @@
             <span class="mx-2 text-gray-400">or</span>
             <div class="flex-grow h-px bg-gray-200"></div>
           </div>
-          <% // Dynamically construct the redirect URI based on current
-          environment String scheme = request.getScheme(); // http or https
-          String serverName = request.getServerName(); // localhost or
-          jikan-calendar.onrender.com int serverPort = request.getServerPort();
-          String contextPath = request.getContextPath(); //
-          /PRJ_Assignment_toidaiii or /calendar String redirectUri; if
-          (serverPort == 80 || serverPort == 443 || serverPort == 10000) { //
-          Production (Render uses port 10000 internally, but external is 80/443)
+          <% String scheme = request.getScheme(); String serverName =
+          request.getServerName(); int serverPort = request.getServerPort();
+          String contextPath = request.getContextPath(); String redirectUri; if
+          (serverPort == 80 || serverPort == 443 || serverPort == 10000) {
           redirectUri = scheme + "://" + serverName + contextPath + "/login"; }
-          else { // Local development redirectUri = scheme + "://" + serverName
-          + ":" + serverPort + contextPath + "/login"; } String googleClientId =
-          "1097365484665-9av0b9o7gjpq7j5co0ecf8dbipsbpvkd.apps.googleusercontent.com";
-          String googleAuthUrl =
-          "https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid"
-          + "&redirect_uri=" + java.net.URLEncoder.encode(redirectUri, "UTF-8")
-          + "&response_type=code" + "&client_id=" + googleClientId +
-          "&prompt=consent"; %>
+          else { redirectUri = scheme + "://" + serverName + ":" + serverPort +
+          contextPath + "/login"; } String googleAuthUrl =
+          "https://accounts.google.com/o/oauth2/auth?scope=email%20profile%20openid&redirect_uri="
+          + java.net.URLEncoder.encode(redirectUri, "UTF-8") +
+          "&response_type=code&client_id=1097365484665-9av0b9o7gjpq7j5co0ecf8dbipsbpvkd.apps.googleusercontent.com&prompt=consent";
+          %>
           <a
             href="<%= googleAuthUrl %>"
             class="w-full flex items-center justify-center border py-3 rounded-lg hover:bg-gray-100 transition mb-6"
           >
-            <!--Icon logo Google-->
             <img
               src="<%=request.getContextPath()%>/assets/Google.svg"
               alt="Google"
@@ -123,7 +105,6 @@
             />
             Google
           </a>
-
           <div class="text-center text-gray-500 text-sm">
             Don't have an account?
             <a href="signup" class="text-blue-500 font-semibold hover:underline"
@@ -139,7 +120,6 @@
           </div>
         </div>
       </div>
-      <!-- Right: Full Background Image with Quote -->
       <div
         class="hidden md:flex w-1/2 h-full relative items-center justify-center bg-[url('<%=request.getContextPath()%>/assets/table-bg.jpg')] bg-cover bg-center"
       >
