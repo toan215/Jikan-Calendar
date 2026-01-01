@@ -10,8 +10,8 @@
   </head>
   <% if (session != null && session.getAttribute("user_email") != null) { // Nếu
   đã đăng nhập thì chuyển hướng đến trang home.jsp
-  response.sendRedirect(request.getContextPath() + "home"); return; // Dừng lại,
-  không cần tiếp tục xử lý trong trang login.jsp } %>
+  response.sendRedirect(request.getContextPath() + "/home"); return; // Dừng
+  lại, không cần tiếp tục xử lý trong trang login.jsp } %>
   <body class="min-h-screen flex items-center justify-center bg-white">
     <div class="w-full h-screen flex">
       <!-- Left: Login Form -->
@@ -125,7 +125,7 @@
           </a>
 
           <div class="text-center text-gray-500 text-sm">
-            Don’t have an account?
+            Don't have an account?
             <a href="signup" class="text-blue-500 font-semibold hover:underline"
               >Sign Up</a
             >
@@ -147,7 +147,7 @@
         <div class="relative z-10 w-4/5 mx-auto text-center">
           <span
             class="text-6xl text-gray-200 absolute -mt-8 -ml-8 select-none left-0 top-0"
-            >“</span
+            >"</span
           >
           <p class="text-2xl font-light text-gray-700 mb-2 leading-snug mt-8">
             Time stays
