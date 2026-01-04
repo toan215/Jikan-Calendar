@@ -21,12 +21,22 @@ public class DBConnection implements DBinformation {
 
     public static Connection getConnection() {
         Connection con = null;
+
+        // DEBUG: Print all DB config values
+        System.out.println("=== DBConnection.getConnection() ===");
+        System.out.println("driverName: " + (driverName != null ? driverName : "NULL!"));
+        System.out.println("dbURL: " + (dbURL != null ? dbURL : "NULL!"));
+        System.out.println("userDB: " + (userDB != null ? userDB : "NULL!"));
+        System.out.println("passDB: " + (passDB != null ? "***SET***" : "NULL!"));
+
         try {
             Class.forName(driverName);
             con = DriverManager.getConnection(dbURL, userDB, passDB);
+            System.out.println("✅ Connection SUCCESS!");
             return con;
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("❌ Connection FAILED: " + ex.getMessage());
+            ex.printStackTrace();
         }
         return null;
     }

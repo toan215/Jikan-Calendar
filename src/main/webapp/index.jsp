@@ -7,15 +7,21 @@
     <title>JSP Page</title>
   </head>
   <% // Database Connection Test - Check if Supabase connects successfully
-  java.sql.Connection testConn = null; try { testConn =
-  com.database.DBConnection.getConnection(); if (testConn != null) {
-  System.out.println("✅ DATABASE CONNECTION SUCCESS on index.jsp!");
+  System.out.println("=== DATABASE CONNECTION TEST ===");
+  System.out.println("DB_TYPE: " + com.database.DBinformation.DB_TYPE);
+  System.out.println("Driver: " + com.database.DBinformation.driverName);
   System.out.println("DB URL: " + com.database.DBinformation.dbURL);
-  System.out.println("DB User: " + com.database.DBinformation.userDB); } else {
-  System.out.println("❌ DATABASE CONNECTION FAILED - Connection is NULL"); } }
-  catch (Exception e) { System.out.println("❌ DATABASE CONNECTION ERROR: " +
-  e.getMessage()); e.printStackTrace(); } finally { if (testConn != null) { try
-  { testConn.close(); } catch (Exception e) { /* ignore */ } } } %>
+  System.out.println("DB User: " + com.database.DBinformation.userDB);
+  System.out.println("DB Pass: " + (com.database.DBinformation.passDB != null ?
+  "***SET***" : "NULL")); java.sql.Connection testConn = null; try { testConn =
+  com.database.DBConnection.getConnection(); if (testConn != null) {
+  System.out.println("✅ DATABASE CONNECTION SUCCESS!"); } else {
+  System.out.println("❌ DATABASE CONNECTION FAILED - Connection is NULL");
+  System.out.println("⚠️ Check if SUPABASE_URL, SUPABASE_USER, SUPABASE_PASS are
+  set on Render!"); } } catch (Exception e) { System.out.println("❌ DATABASE
+  CONNECTION ERROR: " + e.getMessage()); e.printStackTrace(); } finally { if
+  (testConn != null) { try { testConn.close(); } catch (Exception e) { /* ignore
+  */ } } } System.out.println("================================="); %>
   <jsp:include page="views/base/header.jsp" />
   <body>
     <section
