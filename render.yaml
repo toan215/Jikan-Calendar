@@ -6,30 +6,33 @@ services:
     buildCommand: mvn clean package -DskipTests
     startCommand: chmod +x start.sh && ./start.sh
     envVars:
+      # Database Configuration for Supabase
       - key: DB_TYPE
-        value: postgres
-      - key: DB_HOST
-        sync: false
-      - key: DB_PORT
-        value: 5432
-      - key: DB_NAME
-        sync: false
-      - key: DB_USER
-        sync: false
-      - key: DB_PASSWORD
-        sync: false
-      - key: DB_SCHEMA
-        value: public
+        value: SUPABASE
+      - key: SUPABASE_DRIVER
+        value: org.postgresql.Driver
+      - key: SUPABASE_URL
+        sync: false # Set in Render dashboard: jdbc:postgresql://db.ecebkrlmqwzjmluiulev.supabase.co:5432/postgres?sslmode=require&ssl=true
+      - key: SUPABASE_USER
+        sync: false # Set in Render dashboard: postgres
+      - key: SUPABASE_PASS
+        sync: false # Set in Render dashboard: your_password
+
+      # AI Services
       - key: OPENAI_API_KEY
         sync: false
       - key: QDRANT_API_KEY
         sync: false
       - key: QDRANT_CLUSTER_URL
         sync: false
+
+      # Email Configuration
       - key: EMAIL_USERNAME
         sync: false
       - key: EMAIL_PASSWORD
         sync: false
+
+      # Server Configuration
       - key: PORT
         value: 8080
       - key: JAVA_TOOL_OPTIONS
