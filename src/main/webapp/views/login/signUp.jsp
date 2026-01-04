@@ -47,7 +47,11 @@
                 class="flex items-center border border-gray-300 rounded-lg px-3 py-2 bg-white focus-within:ring-2 focus-within:ring-blue-400 gap-2"
               >
                 <!-- User Icon -->
-                <jsp:include page="../../assets/User.svg" />
+                <img
+                  src="<%=request.getContextPath()%>/assets/User.svg"
+                  alt="User"
+                  class="w-5 h-5"
+                />
                 <input
                   type="text"
                   name="username"
@@ -64,7 +68,11 @@
                 class="flex items-center border border-gray-300 rounded-lg px-3 py-2 bg-white focus-within:ring-2 focus-within:ring-blue-400 gap-2"
               >
                 <!-- Email Icon -->
-                <jsp:include page="../../assets/EmailLog.svg" />
+                <img
+                  src="<%=request.getContextPath()%>/assets/EmailLog.svg"
+                  alt="Email"
+                  class="w-5 h-5"
+                />
                 <input
                   type="email"
                   name="email"
@@ -81,7 +89,11 @@
                 class="flex items-center border border-gray-300 rounded-lg px-3 py-2 bg-white focus-within:ring-2 focus-within:ring-blue-400 gap-2"
               >
                 <!-- Lock Icon -->
-                <jsp:include page="../../assets/Key.svg" />
+                <img
+                  src="<%=request.getContextPath()%>/assets/Key.svg"
+                  alt="Password"
+                  class="w-5 h-5"
+                />
                 <input
                   type="password"
                   name="password"
@@ -102,7 +114,11 @@
                 class="flex items-center border border-gray-300 rounded-lg px-3 py-2 bg-white focus-within:ring-2 focus-within:ring-blue-400 gap-2"
               >
                 <!-- Lock Icon -->
-                <jsp:include page="../../assets/Key.svg" />
+                <img
+                  src="<%=request.getContextPath()%>/assets/Key.svg"
+                  alt="Password"
+                  class="w-5 h-5"
+                />
                 <input
                   type="password"
                   name="repass"
