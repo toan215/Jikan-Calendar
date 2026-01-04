@@ -12,7 +12,7 @@ Author : ADMIN --%> <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <section
       class="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
       style="
-        background-image: url('${pageContext.request.contextPath}/assets/calendar-bg.jpg');
+        background-image: url('<%=request.getContextPath()%>/assets/calendar-bg.jpg');
       "
     >
       <div

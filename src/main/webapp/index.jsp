@@ -11,7 +11,9 @@
     <section
       id="home"
       class="relative w-full h-screen flex items-center justify-center bg-cover bg-center"
-      style="background-image: url('assets/home-bg.jpg')"
+      style="
+        background-image: url('<%=request.getContextPath()%>/assets/home-bg.jpg');
+      "
     >
       <div class="absolute inset-0 bg-black bg-opacity-80"></div>
       <div
@@ -28,7 +30,7 @@
           lost forever.
         </p>
         <img
-          src="assets/software-img.png"
+          src="<%=request.getContextPath()%>/assets/software-img.png"
           alt="JiKan App Screenshot"
           class="mx-auto w-full max-w-2xl"
         />
@@ -168,7 +170,11 @@
           <div
             class="w-full max-w-md h-80 bg-white border border-gray-300 rounded-xl flex items-center justify-center"
           >
-            <img src="assets/calendbot.png" alt="CalendBot" class="h-64" />
+            <img
+              src="<%=request.getContextPath()%>/assets/calendbot.png"
+              alt="CalendBot"
+              class="h-64"
+            />
           </div>
         </div>
       </div>
@@ -299,7 +305,7 @@
         <!-- Right: Image -->
         <div class="flex-1 flex justify-center">
           <img
-            src="assets/software-img.png"
+            src="<%=request.getContextPath()%>/assets/software-img.png"
             alt="JiKan App Screenshot"
             class="mx-auto w-full max-w-2xl"
           />
@@ -309,7 +315,9 @@
     <section
       id="contact"
       class="relative w-full min-h-[600px] flex items-center justify-center bg-cover bg-center"
-      style="background-image: url('assets/contact-bg.jpg')"
+      style="
+        background-image: url('<%=request.getContextPath()%>/assets/contact-bg.jpg');
+      "
     >
       <div class="absolute inset-0 bg-black bg-opacity-70"></div>
       <div

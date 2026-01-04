@@ -19,7 +19,7 @@ ADMIN --%> <%@page contentType="text/html" pageEncoding="UTF-8"%>
   <body class="bg-gray-50 min-h-screen flex items-center justify-center">
     <div class="fixed inset-0 -z-10 flex items-center justify-center">
       <img
-        src="/assets/calendar-bg.jpg"
+        src="<%=request.getContextPath()%>/assets/calendar-bg.jpg"
         alt="background"
         class="w-full h-full object-cover opacity-30"
       />
