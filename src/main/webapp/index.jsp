@@ -6,6 +6,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>JSP Page</title>
   </head>
+  <% // Database Connection Test - Check if Supabase connects successfully
+  java.sql.Connection testConn = null; try { testConn =
+  com.database.DBConnection.getConnection(); if (testConn != null) {
+  System.out.println("✅ DATABASE CONNECTION SUCCESS on index.jsp!");
+  System.out.println("DB URL: " + com.database.DBinformation.dbURL);
+  System.out.println("DB User: " + com.database.DBinformation.userDB); } else {
+  System.out.println("❌ DATABASE CONNECTION FAILED - Connection is NULL"); } }
+  catch (Exception e) { System.out.println("❌ DATABASE CONNECTION ERROR: " +
+  e.getMessage()); e.printStackTrace(); } finally { if (testConn != null) { try
+  { testConn.close(); } catch (Exception e) { /* ignore */ } } } %>
   <jsp:include page="views/base/header.jsp" />
   <body>
     <section
